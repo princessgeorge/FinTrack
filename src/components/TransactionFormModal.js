@@ -1,4 +1,3 @@
-// src/components/TransactionFormModal.js
 import React, { useState } from 'react';
 
 const TransactionFormModal = ({ onSave, onClose, type }) => {

@@ -1,23 +1,50 @@
-import logo from './logo.svg';
+// src/App.js
+import React, { useState, useEffect } from 'react';
+import Header from './components/Header';
+import Dashboard from './components/Dashboard';
+import TransactionsList from './components/TransactionsList';
+import TransactionFormModal from './components/TransactionFormModal';
 import './App.css';
 
 function App() {
+  const [transactions, setTransactions] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('Income');
+
+  useEffect(() => {
+    const savedTransactions = JSON.parse(localStorage.getItem('transactions')) || [];
+    setTransactions(savedTransactions);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+  }, [transactions]);
+
+  const addTransaction = (transaction) => {
+    setTransactions([...transactions, transaction]);
+  };
+
+  const deleteTransaction = (id) => {
+    setTransactions(transactions.filter(t => t.id !== id));
+  };
+
+  const handleAddClick = (type) => {
+    setModalType(type);
+    setModalOpen(true);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Dashboard transactions={transactions} onAdd={handleAddClick} />
+      <TransactionsList transactions={transactions} onDelete={deleteTransaction} />
+      {modalOpen && (
+        <TransactionFormModal
+          type={modalType}
+          onSave={addTransaction}
+          onClose={() => setModalOpen(false)}
+        />
+      )}
     </div>
   );
 }
