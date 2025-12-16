@@ -1,10 +1,11 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import TransactionsList from './components/TransactionsList';
 import TransactionFormModal from './components/TransactionFormModal';
 import './App.css';
+import ChartsSection from './components/ChartsSection';
+
 
 function App() {
   const [transactions, setTransactions] = useState([]);
@@ -44,7 +45,10 @@ function App() {
           onSave={addTransaction}
           onClose={() => setModalOpen(false)}
         />
+        
       )}
+      <ChartsSection transactions={transactions} />
+
     </div>
   );
 }
