@@ -8,24 +8,29 @@ const TransactionFormModal = ({ onSave, onClose, type }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    // Validate inputs
     if (!amount || !category || !date || Number(amount) <= 0) {
       alert('Please fill all fields correctly');
       return;
     }
 
+    // Save the transaction
     onSave({
-      id: Date.now(),
-      type,
-      amount,
+      id: Date.now(),                // unique id
+      type,                           // Income or Expense
+      amount: Number(amount),         // convert to number
       category,
       date,
-      note
+      note: note || ''                // default empty string if note not entered
     });
 
+    // Reset form
     setAmount('');
     setCategory('');
     setDate('');
     setNote('');
+
     onClose();
   };
 

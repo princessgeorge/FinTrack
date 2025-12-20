@@ -1,0 +1,36 @@
+
+
+.transactions-list {
+  margin-top: 20px;
+}
+
+/* Heading for the transaction history */
+.transactions-heading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #000000; /* black text */
+}
+
+.no-transactions {
+  text-align: center;
+  color: #6B7280;
+  font-style: italic;
+}
+
+.transactions-list {
+  margin-top: 20px;
+  animation: fadeInList 0.5s ease;
+}
+
+@keyframes fadeInList {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.transactions-heading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #000000;
+}

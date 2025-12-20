@@ -156,3 +156,18 @@ button:active {
   border-radius: 16px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.05);
 }
+
+.income-amount {
+  color: #22C55E; /* Green */
+  font-weight: bold;
+}
+
+.balance-amount {
+  color: #22C55E; /* Green */
+  font-weight: bold;
+}
+
+.expense-amount {
+  color: #EF4444; /* Red */
+  font-weight: bold;
+}

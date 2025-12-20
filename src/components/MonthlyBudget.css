@@ -1,0 +1,71 @@
+.monthly-budget {
+  background: #f9fafb;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+.budget-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.budget-controls input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
+
+.budget-controls button {
+  padding: 8px 12px;
+  background-color: #22C55E;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.budget-controls button:hover {
+  background-color: #16a34a;
+}
+
+.budget-progress-bar {
+   background: #e5e7eb; /* light gray background */
+  border-radius: 6px;
+  height: 25px; /* slightly taller for text */
+  width: 100%;
+  margin-top: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.budget-progress-fill {
+  height: 100%;
+  background: #22C55E; /* green fill */
+  transition: width 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.budget-progress-fill.over {
+  background: #EF4444; /* red fill if budget exceeded */
+}
+
+
+
+.budget-percentage {
+  position: relative;
+  z-index: 1;
+}
+
+.budget-warning {
+  color: #EF4444;
+  font-weight: bold;
+  margin-top: 5px;
+}

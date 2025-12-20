@@ -1,4 +1,6 @@
 import React from 'react';
+import './Dashboard.css';
+
 
 const Dashboard = ({ transactions, onAdd }) => {
   const totalIncome = transactions
@@ -15,16 +17,21 @@ const Dashboard = ({ transactions, onAdd }) => {
     <div className="dashboard">
       <div className="summary-card">
         <h3>Total Income</h3>
-        <p>${totalIncome}</p>
+        <p className="green-text">${totalIncome}</p>
       </div>
+
       <div className="summary-card">
         <h3>Total Expenses</h3>
-        <p>${totalExpenses}</p>
+        <p className="red-text">${totalExpenses}</p>
       </div>
+
       <div className="summary-card">
         <h3>Balance</h3>
-        <p>${balance}</p>
+        <p className={balance >= 0 ? "green-text" : "red-text"}>
+          ${balance}
+        </p>
       </div>
+
       <div className="actions">
         <button onClick={() => onAdd('Income')}>Add Income</button>
         <button onClick={() => onAdd('Expense')}>Add Expense</button>

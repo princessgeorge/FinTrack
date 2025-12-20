@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
+import MonthlyBudget from './components/MonthlyBudget';
 import TransactionsList from './components/TransactionsList';
 import TransactionFormModal from './components/TransactionFormModal';
 import './App.css';
@@ -13,9 +14,14 @@ function App() {
   const [modalType, setModalType] = useState('Income');
 
   useEffect(() => {
-    const savedTransactions = JSON.parse(localStorage.getItem('transactions')) || [];
+  const savedTransactions = JSON.parse(localStorage.getItem('transactions'));
+  if (Array.isArray(savedTransactions)) {
     setTransactions(savedTransactions);
-  }, []);
+  } else {
+    setTransactions([]);
+  }
+}, []);
+
 
   useEffect(() => {
     localStorage.setItem('transactions', JSON.stringify(transactions));
@@ -38,7 +44,8 @@ function App() {
     <div className="App">
       <Header />
       <Dashboard transactions={transactions} onAdd={handleAddClick} />
-      <TransactionsList transactions={transactions} onDelete={deleteTransaction} />
+  <MonthlyBudget transactions={transactions} />
+   <TransactionsList transactions={transactions} onDelete={deleteTransaction} />
       {modalOpen && (
         <TransactionFormModal
           type={modalType}
