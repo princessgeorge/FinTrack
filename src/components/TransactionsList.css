@@ -34,3 +34,37 @@
   margin-bottom: 10px;
   color: #000000;
 }
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.filter-buttons button {
+  padding: 5px 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.filter-buttons button:hover {
+  background: #e5e5e5;
+}
+
+.filter-buttons button.active {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
