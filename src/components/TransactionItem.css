@@ -1,3 +1,5 @@
+/* Keep your existing styles */
+
 .transaction-item {
   display: flex;
   justify-content: space-between;
@@ -8,9 +10,19 @@
   background: #fff;
   box-shadow: 0 3px 6px rgba(0,0,0,0.05);
   font-weight: 600;
-  animation: fadeIn 0.3s ease;
-  position: relative; /* added to allow badge positioning */
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease; /* smooth transition */
 }
+
+/* When item is hidden, apply fade-out */
+.transaction-item.fade-out {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none; /* prevent clicks while fading */
+}
+
+/* Keep your other styles intact */
 
 .transaction-left {
   display: flex;

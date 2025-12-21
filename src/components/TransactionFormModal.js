@@ -1,68 +1,89 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import './TransactionFormModal.css';
 
-const TransactionFormModal = ({ onSave, onClose, type }) => {
+const TransactionFormModal = ({ type, onSave, onClose, editingTransaction }) => {
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
   const [date, setDate] = useState('');
   const [note, setNote] = useState('');
 
-  const handleSubmit = e => {
+  // Pre-fill form if editing
+  useEffect(() => {
+    if (editingTransaction) {
+      setAmount(editingTransaction.amount);
+      setCategory(editingTransaction.category);
+      setDate(editingTransaction.date);
+      setNote(editingTransaction.note || '');
+    } else {
+      setAmount('');
+      setCategory('');
+      setDate('');
+      setNote('');
+    }
+  }, [editingTransaction]);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate inputs
+    // Validation
     if (!amount || !category || !date || Number(amount) <= 0) {
       alert('Please fill all fields correctly');
       return;
     }
 
-    // Save the transaction
     onSave({
-      id: Date.now(),                // unique id
-      type,                           // Income or Expense
-      amount: Number(amount),         // convert to number
+      id: editingTransaction ? editingTransaction.id : Date.now(),
+      type,
+      amount,
       category,
       date,
-      note: note || ''                // default empty string if note not entered
+      note
     });
 
-    // Reset form
+    // Reset form & close modal
     setAmount('');
     setCategory('');
     setDate('');
     setNote('');
-
     onClose();
   };
 
   return (
     <div className="modal">
-      <form onSubmit={handleSubmit}>
-        <h3>Add {type}</h3>
+      <form onSubmit={handleSubmit} className="modal-form">
+        <h3>{editingTransaction ? `Edit ${type}` : `Add ${type}`}</h3>
+
         <input
           type="number"
           placeholder="Amount"
           value={amount}
-          onChange={e => setAmount(e.target.value)}
+          onChange={(e) => setAmount(e.target.value)}
         />
+
         <input
           type="text"
           placeholder="Category"
           value={category}
-          onChange={e => setCategory(e.target.value)}
+          onChange={(e) => setCategory(e.target.value)}
         />
+
         <input
           type="date"
           value={date}
-          onChange={e => setDate(e.target.value)}
+          onChange={(e) => setDate(e.target.value)}
         />
+
         <input
           type="text"
           placeholder="Note (optional)"
           value={note}
-          onChange={e => setNote(e.target.value)}
+          onChange={(e) => setNote(e.target.value)}
         />
-        <button type="submit">Save</button>
-        <button type="button" onClick={onClose}>Cancel</button>
+
+        <div className="modal-buttons">
+          <button type="submit">{editingTransaction ? 'Save Changes' : 'Add Transaction'}</button>
+          <button type="button" onClick={onClose}>Cancel</button>
+        </div>
       </form>
     </div>
   );
