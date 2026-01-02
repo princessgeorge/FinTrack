@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './TransactionFormModal.css';
+
 
 const TransactionFormModal = ({ type, onSave, onClose, editingTransaction }) => {
   const [amount, setAmount] = useState('');

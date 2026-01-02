@@ -171,3 +171,58 @@ button:active {
   color: #EF4444; /* Red */
   font-weight: bold;
 }
+
+/* Light theme (default) */
+:root {
+  --bg-color: #f9fafb;
+  --card-bg: #ffffff;
+  --text-color: #111827;
+  --accent-color: #22C55E;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg-color: #1f2937;
+  --card-bg: #374151;
+  --text-color: #f9fafb;
+  --accent-color: #22C55E;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Cards, modals, dashboard, etc. */
+.dashboard, .transactions-list, .summary-card, .modal {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.App {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+.summary-card,
+.transaction-item,
+.modal {
+  background-color: var(--card-bg);
+}
+
+.top-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin: 10px 20px;
+}
+
+.budget-alert {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0;
+}

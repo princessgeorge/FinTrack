@@ -2,7 +2,7 @@ import React from 'react';
 import './Dashboard.css';
 
 
-const Dashboard = ({ transactions, onAdd }) => {
+const Dashboard = ({ transactions, onAdd, onExport }) => {
   const totalIncome = transactions
     .filter(t => t.type === 'Income')
     .reduce((acc, t) => acc + Number(t.amount), 0);
@@ -35,9 +35,13 @@ const Dashboard = ({ transactions, onAdd }) => {
       <div className="actions">
         <button onClick={() => onAdd('Income')}>Add Income</button>
         <button onClick={() => onAdd('Expense')}>Add Expense</button>
+          <button onClick={onExport}>Export CSV</button>
+
       </div>
     </div>
+    
   );
+  
 };
 
 export default Dashboard;

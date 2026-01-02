@@ -12,75 +12,83 @@ function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('Income');
   const [editingTransaction, setEditingTransaction] = useState(null);
+  const [theme, setTheme] = useState('light');
 
-  // Load transactions from localStorage
+  // Load transactions
   useEffect(() => {
     const savedTransactions = JSON.parse(localStorage.getItem('transactions'));
-    if (Array.isArray(savedTransactions)) {
-      setTransactions(savedTransactions);
-    } else {
-      setTransactions([]);
-    }
+    if (Array.isArray(savedTransactions)) setTransactions(savedTransactions);
+    else setTransactions([]);
   }, []);
 
-  // Save transactions to localStorage
+  // Save transactions
   useEffect(() => {
     localStorage.setItem('transactions', JSON.stringify(transactions));
   }, [transactions]);
 
-  // Add new transaction
+  // Apply theme
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
   const addTransaction = (transaction) => {
     if (editingTransaction) {
-      // Update existing transaction
-      setTransactions(
-        transactions.map((t) =>
-          t.id === editingTransaction.id ? { ...transaction, id: editingTransaction.id } : t
-        )
-      );
+      setTransactions(transactions.map(t => t.id === transaction.id ? transaction : t));
       setEditingTransaction(null);
     } else {
-      // Add new transaction
       setTransactions([...transactions, transaction]);
     }
   };
 
-  // Delete transaction
   const deleteTransaction = (id) => {
-    setTransactions(transactions.filter((t) => t.id !== id));
+    setTransactions(transactions.filter(t => t.id !== id));
   };
 
-  // Open modal to add new transaction
   const handleAddClick = (type) => {
     setModalType(type);
-    setEditingTransaction(null);
     setModalOpen(true);
+    setEditingTransaction(null);
   };
 
-  // Open modal to edit existing transaction
   const handleEditTransaction = (transaction) => {
     setEditingTransaction(transaction);
     setModalType(transaction.type);
     setModalOpen(true);
   };
 
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+  };
+
+  const handleExportCSV = () => {
+    if (transactions.length === 0) {
+      alert("No transactions to export!");
+      return;
+    }
+
+    const headers = ["ID", "Type", "Amount", "Category", "Date", "Note"];
+    const rows = transactions.map(t => [t.id, t.type, t.amount, t.category, t.date, t.note]);
+    const csvContent = "data:text/csv;charset=utf-8," + [headers, ...rows].map(e => e.join(",")).join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "fintrack_transactions.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="App">
-      <Header />
-
-      {/* Dashboard with Add buttons */}
-      <Dashboard transactions={transactions} onAdd={handleAddClick} />
-
-      {/* Monthly Budget section */}
+      <Header theme={theme} toggleTheme={toggleTheme} />
+      <Dashboard transactions={transactions} onAdd={handleAddClick} onExport={handleExportCSV} />
       <MonthlyBudget transactions={transactions} />
-
-      {/* Transaction History with Search, Filter, Edit, Delete */}
-      <TransactionsList
-        transactions={transactions}
-        onDelete={deleteTransaction}
-        onEdit={handleEditTransaction}
+      <TransactionsList 
+        transactions={transactions} 
+        onDelete={deleteTransaction} 
+        onEdit={handleEditTransaction} 
       />
-
-      {/* Add/Edit Transaction Modal */}
       {modalOpen && (
         <TransactionFormModal
           type={modalType}
@@ -89,8 +97,6 @@ function App() {
           editingTransaction={editingTransaction}
         />
       )}
-
-      {/* Charts Section */}
       <ChartsSection transactions={transactions} />
     </div>
   );

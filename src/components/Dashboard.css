@@ -23,6 +23,7 @@
 .actions button {
   margin-right: 10px;
   padding: 10px 15px;
+  margin-bottom: 10px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
