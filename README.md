@@ -1,20 +1,29 @@
-# FinTrack – Personal Finance Tracker
+# FinTrack
 
-A modern, simple, and intuitive personal finance tracker built with React.
+## Description
+A personal finance tracking web application that helps users manage income, expenses, and monthly budgets.
 
-##  Features (More Coming Soon)
-- Add, edit, delete transactions
-- Track income & expenses
-- Dashboard summary
+## Features
+- Add, edit, and delete transactions
+- Search and filter transactions
+- Monthly budget tracking with progress bar
+- Interactive charts
+- Export transactions to CSV
+- Light and dark mode
 - Local storage persistence
 
-##  Tech Stack
+## Technologies Used
 - React
-- JavaScript
 - CSS
 - LocalStorage
 
-##  Setup Instructions
-```bash
-npm install
-npm start
+## Installation
+1. Clone the repository
+2. Run `npm install`
+3. Run `npm start`
+
+## Usage
+Open the app and start adding your income and expenses.
+
+## Author
+ADAEZE GLORIA OKAFOR
