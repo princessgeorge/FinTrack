@@ -1,16 +1,26 @@
 # FinTrack
+Personal Finance Tracker Web Application
 
 ## Description
-A personal finance tracking web application that helps users manage income, expenses, and monthly budgets.
+FinTrack is a modern web application that helps users efficiently track their personal finances. Users can manage income, expenses, and monthly budgets, visualize spending trends, and export data for offline use.
+
 
 ## Features
+**Transactions**
 - Add, edit, and delete transactions
-- Search and filter transactions
-- Monthly budget tracking with progress bar
-- Interactive charts
+- Search and filter transactions by type, category, date, or amount
+
+**Budgeting**
+- Set monthly budgets with a dynamic progress bar
+
+**Analytics**
+- Interactive charts showing income vs expenses and spending by category
+
+**Other**
 - Export transactions to CSV
-- Light and dark mode
-- Local storage persistence
+- Light and dark mode toggle
+- Data saved in browser via LocalStorage
+
 
 ## Technologies Used
 - React
